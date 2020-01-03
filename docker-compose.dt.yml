@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  eshopwebmvc:
+    image: ${DOCKER_REGISTRY-}eshopwebmvc
+    build:
+      context: .
+      dockerfile: src/Web/Dockerfile
+
+  frontend:
+    image: ${DOCKER_REGISTRY-}frontend
+    build:
+      context: .
+      dockerfile: src/Proxy/Dockerfile
