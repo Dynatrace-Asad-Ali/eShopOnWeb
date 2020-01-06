@@ -121,7 +121,7 @@
                 ]
             }
         },
-        "customData": "[concat('#include\n', uri(parameters('_artifactsLocation'),concat('Cloud-Init.txt',parameters('_artifactsLocationSasToken'))))]"
+        "customData": "[concat('#include\n', uri(parameters('_artifactsLocation'),concat('cloud-init.txt',parameters('_artifactsLocationSasToken'))))]"
     },
     "resources": [
         {
