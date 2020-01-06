@@ -1,0 +1,12 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - docker.io
+  - python-pip
+write_files:
+runcmd:
+  - service docker start
+  - usermod -aG docker eshopadmin
+  - pip install docker-compose
+  - git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/
+  - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=eSh0pdb!' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu
