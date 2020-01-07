@@ -1,11 +1,10 @@
 #cloud-config
 package_upgrade: true
 packages:
-  - docker.io
-  - python-pip
-write_files:
+- docker.io
+- python-pip
 runcmd:
-  - service docker start
-  - usermod -aG docker eshopadmin
-  - pip install docker-compose
-  - git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/
+- service docker start
+- usermod -aG docker eshopadmin
+- pip install docker-compose
+- git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/
