@@ -9,4 +9,5 @@ runcmd:
 - service docker start
 - usermod -aG docker eshopadmin
 - pip install docker-compose
-- git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/eShopOnWeb | chown -R eshopadmin:eshopadmin /home/eshopadmin/eShopOnWeb
+- git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/eShopOnWeb
+- chown -R eshopadmin:eshopadmin /home/eshopadmin/eShopOnWeb
