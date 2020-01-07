@@ -1,9 +1,8 @@
 #cloud-config
 package_upgrade: true
-packages:
-- docker.io
-- python-pip
 runcmd:
+- apt-get install docker.io -y
+- apt-get install python-pip -y
 - service docker start
 - usermod -aG docker eshopadmin
 - pip install docker-compose
