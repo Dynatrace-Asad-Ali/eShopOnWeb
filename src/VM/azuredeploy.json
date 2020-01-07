@@ -305,36 +305,24 @@
             }
         },
         {
-            "type": "Microsoft.Web/sites",
-            "apiVersion": "2016-08-01",
-            "name": "[parameters('vmName')]",            
-            "properties": {
-                "name": "[parameters('vmName')]",
-                "siteConfig": {
-                    "alwaysOn": true,
-                    "appSettings": [
-                        { "Name": "DT_TENANT", "Value": "[parameters('dynatraceTenant')]" },
-                        { "Name": "DT_API_TOKEN", "Value": "[parameters('dynatraceApiToken')]" },
-                        { "Name": "DT_API_URL", "Value": "[parameters('dynatracePaasToken')]" }
-                    ]
-                },
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('vmName'))]"
-            },
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "('vmName')/dynatrace",
+            "apiVersion": "2018-06-01",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('vmName'))]"
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"
             ],
-            "location": "[parameters('location')]",
-            "resources": [
-                {
-                    "apiVersion": "2016-08-01",
-                    "name": "Dynatrace",
-                    "type": "siteextensions",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Web/sites', parameters('vmName'))]"
-                    ],
-                    "properties": { } 
+            "properties": {
+                "publisher": "dynatrace.ruxit",
+                "type": "oneAgentLinux",
+                "typeHandlerVersion": "2.3",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "tenantId": "[parameters('dynatraceTenant')]",
+                    "token": "[parameters('dynatraceApiToken')]",
+                    "enableLogAnalytics": "yes"
                 }
-            ]
+            }
         }
     ],
     "outputs": {
