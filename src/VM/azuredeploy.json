@@ -101,6 +101,24 @@
             "metadata": {
                 "description": "Name of the Network Security Group"
             }
+        },
+        "dynatraceTenant": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Dynatrace TenantID"
+            }
+        },
+        "dynatraceApiToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Dynatrace API Token"
+            }
+        },
+        "dynatracePaasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Dynatrace PaaS Token"
+            }
         }
     },
     "variables": {
@@ -285,6 +303,38 @@
                     "customData": "[base64(variables('customData'))]"
                 }
             }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2016-08-01",
+            "name": "[parameters('vmName')]",            
+            "properties": {
+                "name": "[parameters('vmName')]",
+                "siteConfig": {
+                    "alwaysOn": true,
+                    "appSettings": [
+                        { "Name": "DT_TENANT", "Value": "[parameters('dynatraceTenant')]" },
+                        { "Name": "DT_API_TOKEN", "Value": "[parameters('dynatraceApiToken')]" },
+                        { "Name": "DT_API_URL", "Value": "[parameters('dynatracePaasToken')]" }
+                    ]
+                },
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('vmName'))]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', parameters('vmName'))]"
+            ],
+            "location": "[parameters('location')]",
+            "resources": [
+                {
+                    "apiVersion": "2016-08-01",
+                    "name": "Dynatrace",
+                    "type": "siteextensions",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/sites', parameters('vmName'))]"
+                    ],
+                    "properties": { } 
+                }
+            ]
         }
     ],
     "outputs": {
