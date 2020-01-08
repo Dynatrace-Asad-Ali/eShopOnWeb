@@ -27,7 +27,6 @@ runcmd:
 - runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/db-restore.sh'
 # Starting eShopOnWeb Monolith
 - cd /home/eshopadmin/eShopOnWeb
-- echo 'changed directory to deploy eShopOnWeb: $(pwd)'
 - sed -i 's/localhost/localdb/g' /home/eshopadmin/eShopOnWeb/src/Web/appsettings.json
 - docker-compose build
 - docker-compose up -d
