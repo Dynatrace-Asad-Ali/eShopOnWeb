@@ -24,8 +24,10 @@ runcmd:
 - sudo apt-get update
 - sudo apt-get install dotnet-sdk-3.1 -y
 # Configuring database context
-- DOTNET_CLI_HOME=/tmp
+- export DOTNET_CLI_HOME=/tmp
+- echo $DOTNET_CLI_HOME
 - cd /home/eshopadmin/eShopOnWeb/src/Web
+- echo $pwd
 - dotnet restore
 - dotnet tool restore
 - dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
@@ -33,6 +35,7 @@ runcmd:
 - echo "DB context configured"
 # Starting eShopOnWeb Monolith
 - cd /home/eshopadmin/eShopOnWeb
+- echo $pwd
 - sed -i 's/localhost/localdb/g' /home/eshopadmin/eShopOnWeb/src/Web/appsettings.json
 - docker-compose build
 - docker-compose up -d
