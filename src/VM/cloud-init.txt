@@ -30,5 +30,6 @@ runcmd:
   - dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
 - cd /home/eshopadmin/eShopOnWeb
 - sed -i 's/localhost/localdb/g' src/Web/appsettings.json
+# Starting eShopOnWeb Monolith
 - docker-compose build
 - docker-compose up -d
