@@ -4,13 +4,15 @@ packages:
 - docker.io
 - python-pip
 runcmd:
-- apt-get install docker.io -y
-- apt-get install python-pip -y
+# Base host configurations
 - service docker start
 - usermod -aG docker eshopadmin
 - pip install docker-compose
+# Bringing eShopOnWeb local to eshopadmin with correct permissions
 - git clone https://github.com/peterhack/eShopOnWeb.git /home/eshopadmin/eShopOnWeb
 - chown -R eshopadmin:eshopadmin /home/eshopadmin/eShopOnWeb
+# Deploying local MSSQL Express eShopOnWeb DB for visibility.  This requires
+# installation of dotnet-sdk to apply DB context and content for Demo
 - docker run --name localdb -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=eSh0pdb!' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu
 - docker network create eshoponweb_default
 - docker network connect eshoponweb_default localdb
@@ -22,7 +24,11 @@ runcmd:
 - sudo apt-get update
 - sudo apt-get install dotnet-sdk-3.1 -y
 - cd /home/eshopadmin/eShopOnWeb/src/Web/
-- dotnet restore
-- dotnet tool restore
-- dotnet ef database update -c catalogcontext -p /home/eshopadmin/eshopOnWeb/src/Infrastructure/Infrastructure.csproj -s /home/eshopadmin/eShopOnWeb/src/Web/Web.csproj
-- dotnet ef database update -c appidentitydbcontext -p /home/eshopadmin/eshopOnWeb/src/Infrastructure/Infrastructure.csproj -s /home/eshopadmin/eshopOnWeb/src/Web/Web.csproj
+  - dotnet restore
+  - dotnet tool restore
+  - dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+  - dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+- cd /home/eshopadmin/eShopOnWeb
+- sed -i 's/localhost/localdb/g' src/Web/appsettings.json
+- docker-compose build
+- docker-compose up -d

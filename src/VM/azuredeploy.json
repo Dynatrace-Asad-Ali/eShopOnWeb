@@ -306,7 +306,7 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "('vmName')/dynatrace",
+            "name": "dynatrace",
             "apiVersion": "2018-06-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -320,7 +320,9 @@
                 "settings": {
                     "tenantId": "[parameters('dynatraceTenant')]",
                     "token": "[parameters('dynatraceApiToken')]",
-                    "enableLogAnalytics": "yes"
+                    "server": "",
+                    "enableLogAnalytics": "yes",
+                    "hostGroup": ""
                 }
             }
         }
