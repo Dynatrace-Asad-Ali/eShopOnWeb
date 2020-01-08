@@ -26,4 +26,6 @@ runcmd:
 # Configuring database context
 - runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/db-restore.sh'
 # Starting eShopOnWeb Monolith
-- runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/start-eShopOnWeb.sh
+- runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/start-eShopOnWeb.sh'
+# Start eShopOnWeb Frontend
+- runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/start-frontend.sh'
