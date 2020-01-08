@@ -26,8 +26,4 @@ runcmd:
 # Configuring database context
 - runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/db-restore.sh'
 # Starting eShopOnWeb Monolith
-- cd /home/eshopadmin/eShopOnWeb
-- sed -i 's/localhost/localdb/g' /home/eshopadmin/eShopOnWeb/src/Web/appsettings.json
-- docker-compose build
-- docker-compose up -d
-- echo "eShopOnWeb Started"
+- runuser -l eshopadmin -c '/home/eshopadmin/eShopOnWeb/src/VM/start-eShopOnWeb.sh
