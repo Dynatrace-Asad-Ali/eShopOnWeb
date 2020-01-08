@@ -306,7 +306,7 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "dynatrace",
+            "name": "[concat(parameters('vmName'),'/','dynatrace')]",
             "apiVersion": "2018-06-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
