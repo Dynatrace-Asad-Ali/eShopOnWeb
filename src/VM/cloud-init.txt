@@ -23,13 +23,7 @@ runcmd:
 - sudo apt-get install apt-transport-https -y
 - sudo apt-get update
 - sudo apt-get install dotnet-sdk-3.1 -y
-- cd /home/eshopadmin/eShopOnWeb/src/Web/
-  - dotnet restore
-  - dotnet tool restore
-  - dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-  - dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-- cd /home/eshopadmin/eShopOnWeb
-- sed -i 's/localhost/localdb/g' src/Web/appsettings.json
+# Configuring database context
+- bash /home/eshopadmin/eShopOnWeb/src/VM/db-restore.sh
 # Starting eShopOnWeb Monolith
-- docker-compose build
-- docker-compose up -d
+- bash /home/eshopadmin/eShopOnWeb/src/VM/start-eShopOnWeb.sh
