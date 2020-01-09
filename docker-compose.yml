@@ -6,4 +6,6 @@ services:
     build:
       context: .
       dockerfile: src/Web/Dockerfile
+    environment:
+    - DT_TAGS="monolith"
 

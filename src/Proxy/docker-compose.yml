@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
     - "80:80"
+    environment:
+    - DT_TAGS="monolith"
 networks:
   default:
     external:
