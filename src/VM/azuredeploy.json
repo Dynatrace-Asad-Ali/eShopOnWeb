@@ -103,7 +103,7 @@
             }
         },
         "dynatraceTenant": {
-            "type": "securestring",
+            "type": "string",
             "metadata": {
                 "description": "Dynatrace TenantID"
             }
@@ -319,7 +319,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "tenantId": "[parameters('dynatraceTenant')]",
-                    "token": "[parameters('dynatraceApiToken')]",
+                    "token": "[parameters('dynatracePaasToken')]",
                     "server": "",
                     "enableLogAnalytics": "yes",
                     "hostGroup": ""
