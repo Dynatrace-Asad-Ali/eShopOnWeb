@@ -7,5 +7,5 @@ services:
       context: .
       dockerfile: src/Web/Dockerfile
     environment:
-    - DT_TAGS="monolith"
+    - DT_TAGS="eShopOnWeb"
 

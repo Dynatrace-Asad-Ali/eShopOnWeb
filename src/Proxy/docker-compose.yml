@@ -9,7 +9,7 @@ services:
     ports:
     - "80:80"
     environment:
-    - DT_TAGS="monolith"
+    - DT_TAGS="eShopOnWeb"
 networks:
   default:
     external:
